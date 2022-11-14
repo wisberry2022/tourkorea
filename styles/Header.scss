@@ -1,0 +1,30 @@
+header {
+  padding: 3rem 0;
+  background-color: #2BAE66;
+
+  nav {
+    >div {
+      // outline: 0.1rem solid #000;
+
+      h1 {
+        font-size: 2.5rem;
+
+        a {
+          color: #FCF6F5;
+        }
+      }
+
+      .sideBar {
+        margin-right: -1rem;
+
+        >li {
+          >a {
+            padding: 0 1rem;
+            font-size: 2.3rem;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

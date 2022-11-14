@@ -1,0 +1,22 @@
+main {
+  position: relative;
+
+  .signIn {
+    // height: 100vh;
+
+    .inner {
+      border: 0.1rem solid #ddd;
+      border-radius: 1.5rem;
+      padding: 5rem 0;
+
+      .left {
+        width: 40%;
+      }
+
+      .right {
+        width: 60%;
+      }
+    }
+
+  }
+}
