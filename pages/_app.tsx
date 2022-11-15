@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import '../styles/Header.scss'
 import '../styles/Main.scss'
+// import '../styles/signIn';
 import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {

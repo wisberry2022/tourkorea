@@ -4,7 +4,6 @@ header {
 
   nav {
     >div {
-      // outline: 0.1rem solid #000;
 
       h1 {
         font-size: 2.5rem;
@@ -24,6 +23,17 @@ header {
             color: #fff;
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:768px) {
+  header {
+
+    nav {
+      .sideBar {
+        margin-right: 0;
       }
     }
   }

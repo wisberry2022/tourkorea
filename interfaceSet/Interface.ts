@@ -1,3 +1,4 @@
+import { StyledComponent } from '@emotion/styled';
 import React from 'react';
 
 export interface CSSFormat {
@@ -7,7 +8,14 @@ export interface CSSFormat {
 export interface dataObj {
   id: number;
   title?: string;
-  icon?: React.ReactElement;
+  icon?: React.ReactElement | string;
   link?: string;
   contents?: string | Array<string>;
 }
+
+export interface includeCSSObj extends dataObj {
+  border?: string;
+  bgColor?: string;
+  color?: string;
+}
+

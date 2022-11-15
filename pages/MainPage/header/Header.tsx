@@ -17,7 +17,6 @@ const Header = () => {
         <Emo.Container display='flex' justifycontent='space-between'>
           <h1>
             <Link href="/">
-              {/* <img src="./assets/logo/logo.png" alt="TourKorea" /> */}
               투어 코리아
             </Link>
           </h1>
