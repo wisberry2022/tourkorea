@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-
-
 import Total from './MainPage/Total'
 
 const Home: NextPage = () => {

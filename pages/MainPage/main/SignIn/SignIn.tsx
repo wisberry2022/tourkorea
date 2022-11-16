@@ -1,8 +1,9 @@
 /**@jsxImportSource @emotion/react */
 import { includeCSSObj } from '../../../../interfaceSet/Interface';
-import { useMediaQuery } from 'react-responsive';
 import * as Emo from '../../../../styles/Basic';
 import * as Style from '../../../../styles/signIn';
+import { useState } from 'react';
+import { SignUpModal } from '../../../modalSet/ModalSet';
 
 const Left = () => {
   return (
@@ -20,7 +21,7 @@ const Left = () => {
         </Style.Phase>
       </Emo.Description>
       <Style.ButtonBox>
-        <Emo.Button b_radius='5rem' bgcolor='#2BAE66' color='#fff'>로그인하기</Emo.Button>
+        <Emo.Button b_radius='5rem' bgcolor='#2BAE66' color='#fff'>TourKorea</Emo.Button>
         <Emo.Button b_radius='5rem' border='0.1rem solid #2BAE66' bgcolor='#fff' color='#2BAE66'>서비스 설명</Emo.Button>
       </Style.ButtonBox>
     </Emo.BasicDiv>
@@ -28,6 +29,7 @@ const Left = () => {
 }
 
 const Right = () => {
+  const [suModal, setSU] = useState<boolean>(false);
   const socialList: Array<includeCSSObj> = [
     { id: 1, title: '네이버 로그인', icon: '../assets/logo/social_01.png', bgColor: '#03C75A', color: '#fff', border: 'none' },
     { id: 2, title: '카카오 로그인', icon: '../assets/logo/social_02.png', bgColor: '#FDDC3F', color: '#111', border: 'none' },
@@ -35,7 +37,7 @@ const Right = () => {
   ]
 
   return (
-    <Emo.BasicDiv width='60%' className="right">
+    <Emo.BasicDiv debug={false} width='60%' className="right">
       <Style.TopDiv className="top">
         <Emo.BasicDiv className="inputBox">
           <Emo.SubDiv className="itmBox">
@@ -58,7 +60,6 @@ const Right = () => {
                 </li>
               ))}
             </Emo.RowFlexUl>
-
           </Style.ButtonBox>
           <Emo.SubDiv className="socialSet">
           </Emo.SubDiv>
@@ -66,10 +67,11 @@ const Right = () => {
       </Style.TopDiv>
       <Style.BottomDiv className="bottom">
         <Emo.BasicDiv className="signInfo">
-          <Emo.SemiPhase cursor={true}>회원가입하기</Emo.SemiPhase>
+          <Emo.SemiPhase cursor={true} onClick={() => (setSU(prev => !prev))}>회원가입하기</Emo.SemiPhase>
           <Emo.SemiPhase cursor={true}>아이디, 비밀번호를 잊었다면?</Emo.SemiPhase>
         </Emo.BasicDiv>
       </Style.BottomDiv>
+      {suModal ? <SignUpModal setSU={setSU} /> : null}
     </Emo.BasicDiv>
   )
 }
@@ -77,12 +79,10 @@ const Right = () => {
 const SignIn = () => {
   return (
     <Emo.Section className="signIn">
-      <Emo.PositionDiv position='absolute' top='200%' left='50%' transform='translate(-50%, -50%)' className="inner">
-        <Emo.Container display='flex' gap='0' width='120rem' className="totalBox">
-          <Left />
-          <Right />
-        </Emo.Container>
-      </Emo.PositionDiv>
+      <Emo.Container display='flex' gap='0' width='120rem' className="inner totalBox">
+        <Left />
+        <Right />
+      </Emo.Container>
     </Emo.Section>
   )
 }

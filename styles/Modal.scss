@@ -1,0 +1,30 @@
+.signupModal {
+  background-color: #fff;
+
+  >div {
+    .mLeft {
+      &::after {
+        display: none;
+      }
+
+      .inputBox {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+
+        input {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    .mRight {
+      &::after {
+        display: none;
+      }
+
+
+    }
+  }
+
+}

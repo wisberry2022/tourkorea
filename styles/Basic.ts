@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 const breakpoints = [500, 768, 1200];
 const mQ = breakpoints.map(bp => `@media screen and (max-width:${bp}px)`)
 
+// Semantic Styled Component
 export const Section = styled.section<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   position: relative;
@@ -20,18 +21,65 @@ export const Section = styled.section<CSSFormat>`
   }
 `;
 
+export const Footer = styled.footer<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+  padding: 1.45rem 0;
+  background-color: #2BAE66;
+
+  ${mQ[0]} {
+    >div {
+      align-items: flex-end;      
+    }
+  }
+`;
+
+// Div Styled Component
 export const BasicDiv = styled.div<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+  display: ${props => props.display ? props.display : 'block'};
+  flex-direction: ${props => props.direction ? props.direction : 'row'};
+  gap: ${props => props.gap ? props.gap : '2.5rem'};
+  justify-content: ${props => props.justifycontent ? props.justifycontent : 'flex-start'};
+  align-items: ${props => props.alignitems ? props.alignitems : 'flex-start'};
+  margin: ${props => props.margin && props.margin};
+  padding: ${props => props.padding ? props.padding : 'auto'};
   width: ${props => props.width ? props.width : '100%'};
   height: ${props => props.height ? props.height : 'auto'};
+
+  ${props => props.isborder &&
+    css`
+      border: ${props.border};
+      border-top: ${props.btop};
+      border-bottom: ${props.bbottom};
+      border-left: ${props.bleft};
+      border-right: ${props.bright};
+    `
+  }
 
   ${mQ[1]} {
     width: 100%;
   }
 `;
 
-export const SubDiv = styled.div<CSSFormat>`
+export const SubDiv = styled(BasicDiv)`
+  position: ${props => props.position ? props.position : 'static'};
+`;
+
+export const ButtonBox = styled.div<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+  display: block;
+  text-align: ${props => props.calign ? props.calign : 'center'};
+
+  ${props => props.isflex &&
+    css`
+      display: flex;
+      flex-direction: ${props.direction ? props.direction : 'row'};
+      justify-content: ${props.justifycontent ? props.justifycontent : 'flex-start'};
+      gap: ${props.gap ? props.gap : '0'};
+      margin: ${props.margin ? props.margin : '0'};
+    `
+  }
+  
 `;
 
 export const Container = styled.div<CSSFormat>`
@@ -42,6 +90,7 @@ export const Container = styled.div<CSSFormat>`
   justify-content: ${props => props.justifycontent ? props.justifycontent : 'flex-start'};
   align-items: ${props => props.alignitems ? props.alignitems : 'flex-start'};
   margin: ${props => props.margin ? props.margin : '0 auto'};
+  padding: ${props => props.padding ? props.padding : 'auto'};
   width: ${props => props.width ? props.width : '120rem'};
 
   ${mQ[2]} {
@@ -57,6 +106,33 @@ export const Container = styled.div<CSSFormat>`
   }
 `
 
+export const PositionDiv = styled.div<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+  position: ${props => props.position ? props.position : 'static'};
+  top: ${props => props.top ? props.top : 'auto'};
+  bottom: ${props => props.bottom ? props.bottom : 'auto'};
+  left: ${props => props.left ? props.left : 'auto'};
+  right: ${props => props.right ? props.right : 'auto'};
+  transform: ${props => props.transform ? props.transform : 'auto'};
+  z-index: ${props => props.zIndex ? props.zIndex : 'auto'};
+
+  ${mQ[2]} {
+    top: 230%;
+  }
+
+  ${mQ[1]} {
+    position: static;
+    transform: translate(0,0);
+  }
+`;
+
+export const ScrollDiv = styled(BasicDiv)`
+  position: ${props => props.isposition ? 'relative' : 'static'};
+  overflow: scroll-y;
+`;
+
+
+// List Styled Component
 export const RowFlexUl = styled.ul<CSSFormat>`
   display: flex;
   gap: ${props => props.gap ? props.gap : '0'};
@@ -106,8 +182,6 @@ export const ColFlexUl = styled.ul<CSSFormat>`
   }
 `;
 
-
-
 export const CustomLI = styled.li<CSSFormat>`
   display: ${props => props.listdisplay ? props.listdisplay : 'block'};
   flex-direction: ${props => props.listdirection ? props.listdirection : 'row'};
@@ -117,26 +191,7 @@ export const CustomLI = styled.li<CSSFormat>`
   color: ${props => props.listcolor ? props.listcolor : 'none'};
 `;
 
-export const PositionDiv = styled.div<CSSFormat>`
-  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
-  position: ${props => props.position ? props.position : 'static'};
-  top: ${props => props.top ? props.top : 'auto'};
-  bottom: ${props => props.bottom ? props.bottom : 'auto'};
-  left: ${props => props.left ? props.left : 'auto'};
-  right: ${props => props.right ? props.right : 'auto'};
-  transform: ${props => props.transform ? props.transform : 'auto'};
-  z-index: ${props => props.zIndex ? props.zIndex : 'auto'};
-
-  ${mQ[2]} {
-    top: 230%;
-  }
-
-  ${mQ[1]} {
-    position: static;
-    transform: translate(0,0);
-  }
-`;
-
+// ETC Component
 export const CustomFigure = styled.figure<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   margin: ${props => props.margin ? props.margin : '0 auto 1.5rem auto'};
@@ -185,6 +240,7 @@ export const Button = styled.button<CSSFormat>`
 `;
 
 export const Emphasize = styled.strong<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   display: block;
   font-size: 1.5rem;
   font-weight: 400;
@@ -207,3 +263,11 @@ export const SemiPhase = styled.span<CSSFormat>`
   }
 `;
 
+
+// export const SubDiv = styled.div<CSSFormat>`
+//   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+//   margin: ${props => props.margin && props.margin};
+//   padding: ${props => props.padding ? props.padding : 'auto'};
+//   width: ${props => props.width ? props.width : '100%'};
+//   height: ${props => props.height ? props.height : 'auto'};
+// `;

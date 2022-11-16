@@ -19,3 +19,7 @@ export interface includeCSSObj extends dataObj {
   color?: string;
 }
 
+export type funcProps = {
+  [key: string]: (x: boolean) => void
+}
+

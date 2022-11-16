@@ -3,13 +3,13 @@ import { dataObj } from '../../../interfaceSet/Interface';
 import Link from 'next/link';
 import { IoIosBookmark } from 'react-icons/io';
 import { IoIosSearch } from 'react-icons/io';
-import { IoMdLogIn } from 'react-icons/io';
+import { IoIosMenu } from 'react-icons/io';
 
 const Header = () => {
   const navList: Array<dataObj> = [
     { id: 1, title: "myDibs", icon: <IoIosBookmark />, link: '/' },
     { id: 2, title: "search", icon: <IoIosSearch />, link: '/' },
-    { id: 3, title: "signInOut", icon: <IoMdLogIn />, link: '/' },
+    { id: 3, title: "signInOut", icon: <IoIosMenu />, link: '/' },
   ]
   return (
     <header>

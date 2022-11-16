@@ -65,10 +65,11 @@ export const FormLabel = styled.label<CSSFormat>`
 `;
 
 export const SignInput = styled.input<CSSFormat>`
+  outline: ${props => props.debug ? '1px solid #000' : 'none'};
   border: none;
   border-bottom: .1rem solid #EEE;
   padding: .5rem .5rem;
-  width: 90%;
+  width: ${props => props.width ? props.width : '90%'};
   font-size: 2.3rem;
 
   &:focus {
