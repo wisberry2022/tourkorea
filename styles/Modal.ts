@@ -3,12 +3,11 @@ import { jsx, css } from '@emotion/react';
 import { CSSFormat } from '../interfaceSet/Interface';
 import styled from '@emotion/styled';
 
-export const SignUpModal = styled.div<CSSFormat>`
+export const BaseModal = styled.div<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   margin: ${props => props.margin ? props.margin : '0 auto'};
   border-radius: 2.5rem;
-  border: .1rem solid #eee;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  border: ${props => props.border ? props.border : 'none'};
   width: ${props => props.width ? props.width : '100%'};
   height: ${props => props.height ? props.height : 'auto'};
 
@@ -25,18 +24,43 @@ export const SignUpModal = styled.div<CSSFormat>`
   }
 `;
 
+export const SignUpModal = styled(BaseModal)`
+  border: none;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+`;
+
+export const ErrorModal = styled(BaseModal)`
+  border-radius: ${props => props.b_radius ? props.b_radius : '0'};
+  border: .1rem solid #eee;
+  padding: 3rem 1.5rem;
+  background-color: #fff;
+  text-align: ${props => props.align ? props.align : 'center'};
+
+  ${props => props.isPosition &&
+    css`
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+    `
+  }
+`;
+
 export const ModalTitle = styled.h4<CSSFormat>`
-  margin-bottom: 5rem;
-  font-size: 2.3rem;
-  font-weight: 600;
+  margin-bottom: ${props => props.marginbottom ? props.marginbottom : '5rem'};
+  font-size: ${props => props.fontsize ? props.fontsize : '2.3rem'};
+  font-weight: ${props => props.fontweight ? props.fontweight : '600'};
 `;
 
 export const ModalSTitle = styled.h5<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   margin-bottom: 1rem;
   padding: ${props => props.padding ? props.padding : '0'};
   font-size: 1.5rem;
   font-weight: 500;
   text-align: ${props => props.align ? props.align : 'center'};
+  background-color: ${props => props.bgcolor ? props.bgcolor : 'transparent'};
 
   ${props => props.isborder &&
     css`
@@ -51,6 +75,7 @@ export const ModalSTitle = styled.h5<CSSFormat>`
     css`
       position: sticky;
       top: 0;
+      z-index: 999;
     `
   }
 `;

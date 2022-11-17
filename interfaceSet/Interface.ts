@@ -1,4 +1,3 @@
-import { StyledComponent } from '@emotion/styled';
 import React from 'react';
 
 export interface CSSFormat {
@@ -13,13 +12,35 @@ export interface dataObj {
   contents?: string | Array<string>;
 }
 
-export interface includeCSSObj extends dataObj {
+export interface includeCSSObj extends dataObj, CSSFormat {
   border?: string;
   bgColor?: string;
   color?: string;
 }
 
-export type funcProps = {
-  [key: string]: (x: boolean) => void
+export interface messageProps {
+  MESSAGE: string;
 }
 
+export interface funcProps<T> {
+  [key: string]: (x: T) => void;
+}
+
+
+
+export type reducerFunc<A, B> = {
+  (x: A, y: B): A
+}
+
+export type customState<T> = {
+  [key: string]: T;
+}
+
+export type Action =
+  | { type: 'ADD', event: React.BaseSyntheticEvent }
+  | { type: 'DELETE' }
+
+
+// export type Action = {
+//   type: 'ADD' | 'DELETE'
+// }

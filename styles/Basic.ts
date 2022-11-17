@@ -128,7 +128,8 @@ export const PositionDiv = styled.div<CSSFormat>`
 
 export const ScrollDiv = styled(BasicDiv)`
   position: ${props => props.isposition ? 'relative' : 'static'};
-  overflow: scroll-y;
+  overflow-y: scroll;
+  background-color: ${props => props.bgcolor ? props.bgcolor : 'auto'};
 `;
 
 
@@ -225,7 +226,7 @@ export const Description = styled.div<CSSFormat>`
 `;
 
 export const Button = styled.button<CSSFormat>`
-  outline: none;
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   display: inline-block;
   border-radius: ${props => props.b_radius ? props.b_radius : 'none'};
   border: ${props => props.border ? props.border : 'none'};
@@ -233,7 +234,7 @@ export const Button = styled.button<CSSFormat>`
   width: ${props => props.width ? props.width : 'auto'};
   height: ${props => props.height ? props.height : 'auto'};
   font-size: ${props => props.fontsize ? props.fontsize : '1.4rem'};
-  font-weight: 500;
+  font-weight: ${props => props.fontweight ? props.fontweight : '500'};
   background-color: ${props => props.bgcolor ? props.bgcolor : 'inherit'};
   color: ${props => props.color ? props.color : 'inherit'};
   cursor: pointer;
@@ -252,9 +253,17 @@ export const Emphasize = styled.strong<CSSFormat>`
   }
 `;
 
+export const Phase = styled.p<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+  padding: 0 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+`;
+
 export const SemiPhase = styled.span<CSSFormat>`
   display: inline-block;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
   ${props => props.cursor &&
     css`
