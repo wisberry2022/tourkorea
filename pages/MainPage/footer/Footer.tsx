@@ -1,4 +1,4 @@
-import * as BS from '../../../styles/Basic';
+import * as BS from '../../../styles/emotions/Basic';
 import * as Custom from '../../../styles/footerStyle';
 import { dataObj } from '../../../interfaceSet/Interface';
 import Link from 'next/link';

@@ -1,15 +1,23 @@
-import * as BS from '../../styles/Basic'
-import * as MD from '../../styles/Modal'
-import * as SI from '../../styles/signIn'
-import { funcProps, includeCSSObj, messageProps } from '../../interfaceSet/Interface'
+import * as BS from '../../styles/emotions/Basic'
+import * as MD from '../../styles/emotions/Modal'
+import * as SI from '../../styles/emotions/signIn'
+import { funcProps, includeCSSObj } from '../../interfaceSet/Interface'
 import { RootState } from '../../store/modules'
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { useInput } from '../../customHook/custom'
 import axios from 'axios'
 
-export const SignUpModal = ({ setSU }: funcProps<boolean>) => {
+interface userProps {
+  setAlert: (x: Array<any>) => void
+  MESSAGE: string
+}
+
+export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
   const infoDesc = useSelector((state: RootState) => state.personInfo);
+  const [signUpData, dispatch] = useInput();
+  const [alert, setAlert] = useState<Array<any>>([false, '']);
+  const isAgree = useRef<HTMLInputElement>(null);
   const tagList: Array<includeCSSObj> = [
     { id: 1, width: '100%', name: 'id', type: 'text', placeholder: '아이디를 입력하세요' },
     { id: 2, width: '100%', name: 'pwd', type: 'password', placeholder: '비밀번호를 입력하세요' },
@@ -17,16 +25,19 @@ export const SignUpModal = ({ setSU }: funcProps<boolean>) => {
     { id: 4, width: '100%', name: 'tel', type: 'tel', placeholder: '연락처를 입력하세요' },
     { id: 5, width: '100%', name: 'address', type: 'address', placeholder: '주소지를 입력하세요' },
   ];
-  const [signUpData, dispatch] = useInput();
-  const [alert, setAlert] = useState<boolean>(false);
-  const isAgree = useRef<HTMLInputElement>(null);
 
   const SignUp = (personInfo: boolean | undefined) => {
     if (personInfo) {
-      console.log(signUpData);
-      axios.post('/api/user/signup', signUpData);
+      axios.post('/api/user/signup', signUpData)
+        .then(() => (setSuccess(true), setSU(false)))
+        .catch(res => {
+          const errorSet = res.response.data;
+          if (!errorSet.ResResult) {
+            setAlert([true, errorSet.ERROR_MESSAGE])
+          }
+        });
     } else {
-      setAlert(true);
+      setAlert([true, '개인정보 이용약관에 동의해주세요!']);
     }
   }
 
@@ -40,7 +51,7 @@ export const SignUpModal = ({ setSU }: funcProps<boolean>) => {
           <BS.SubDiv className="mLeft" debug={false}>
             <BS.SubDiv className="inputBox">
               {tagList.map(it => (
-                <SI.SignInput onChange={(e) => (dispatch({ type: 'ADD', event: e }))} key={it.id} name={it.name} width={it.width} type={it.type} placeholder={it.placeholder} />
+                <SI.SignInput onChange={(e: React.BaseSyntheticEvent) => (dispatch({ type: 'ADD', event: e }))} key={it.id} name={it.name} width={it.width} type={it.type} placeholder={it.placeholder} />
               ))}
             </BS.SubDiv>
           </BS.SubDiv>
@@ -64,21 +75,32 @@ export const SignUpModal = ({ setSU }: funcProps<boolean>) => {
           <BS.Button onClick={() => setSU(false)} b_radius='2.5rem' border='.1rem solid #2BAE66' width='14rem' bgcolor='#fff' color='#2BAE66' fontsize='1.6rem' >취소하기</BS.Button>
         </BS.ButtonBox>
       </BS.Container>
-      {alert ? <AlertModal setAlert={setAlert} MESSAGE='개인정보 이용약관에 동의해주세요!' /> : false}
+      {alert[0] ? <AlertModal setAlert={setAlert} MESSAGE={alert[1]} /> : false}
     </MD.SignUpModal>
   )
-}
-
-interface userProps {
-  setAlert: (x: boolean) => void
-  MESSAGE: string
 }
 
 export const AlertModal = ({ setAlert, MESSAGE }: userProps) => {
   return (
     <MD.ErrorModal isPosition={true} width='30%'>
       <MD.ModalTitle marginbottom='3rem' fontsize='1.7rem'>{MESSAGE}</MD.ModalTitle>
-      <BS.Button debug={false} b_radius='2.5rem' width='40%' fontsize='1.7rem' fontweight='600' bgcolor='#2BAE66' color='#fff' onClick={() => (setAlert(false))}>확인</BS.Button>
+      <BS.Button debug={false} b_radius='2.5rem' width='40%' fontsize='1.7rem' fontweight='600' bgcolor='#2BAE66' color='#fff' onClick={() => (setAlert([false, '']))}>확인</BS.Button>
     </MD.ErrorModal>
+  )
+}
+
+export const SuccessModal = ({ setSuccess }: funcProps<boolean>) => {
+  return (
+    <MD.BaseModal isPosition={true} position='absolute' top='-5%' left='-35%' border='.1rem solid #eee' padding='3rem 1.5rem' bgcolor='#fff'>
+      <BS.CustomFigure margin='0 auto 3.5rem auto' width='35%' height='14rem' background={true} bgsize='cover' imgLink='../../assets/image/main/congratulation.png' ></BS.CustomFigure>
+      <MD.ModalTitle marginbottom='1.5rem' fontsize='2.3rem'>
+        회원가입 성공!
+      </MD.ModalTitle>
+      <BS.Phase align='center'>
+        투어코리아에 오신 것을 환영합니다! <br />
+        어서 빨리 여행지를 찾으러가요!
+      </BS.Phase>
+      <BS.Button margin='0 0 0 43%' b_radius='2.5rem' width='13%' fontsize='1.5rem' bgcolor='#2BAE66' color='#fff' onClick={() => (setSuccess(false))}>확인</BS.Button>
+    </MD.BaseModal>
   )
 }

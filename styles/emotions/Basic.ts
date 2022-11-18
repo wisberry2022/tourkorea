@@ -1,6 +1,6 @@
 /**@jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react';
-import { CSSFormat } from '../interfaceSet/Interface';
+import { CSSFormat } from '../../interfaceSet/Interface';
 import styled from '@emotion/styled';
 
 const breakpoints = [500, 768, 1200];
@@ -202,7 +202,7 @@ export const CustomFigure = styled.figure<CSSFormat>`
     css`
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: contain;
+      background-size: ${props.bgsize ? props.bgsize : 'contain'};
       background-image: url(${props.imgLink ? props.imgLink : ''});
     `
   }
@@ -228,6 +228,7 @@ export const Description = styled.div<CSSFormat>`
 export const Button = styled.button<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   display: inline-block;
+  margin: ${props => props.margin ? props.margin : '0'};
   border-radius: ${props => props.b_radius ? props.b_radius : 'none'};
   border: ${props => props.border ? props.border : 'none'};
   padding: 1rem 1.5rem;
@@ -235,6 +236,7 @@ export const Button = styled.button<CSSFormat>`
   height: ${props => props.height ? props.height : 'auto'};
   font-size: ${props => props.fontsize ? props.fontsize : '1.4rem'};
   font-weight: ${props => props.fontweight ? props.fontweight : '500'};
+  text-align: ${props => props.align ? props.align : 'center'};
   background-color: ${props => props.bgcolor ? props.bgcolor : 'inherit'};
   color: ${props => props.color ? props.color : 'inherit'};
   cursor: pointer;
@@ -259,6 +261,7 @@ export const Phase = styled.p<CSSFormat>`
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.2;
+  text-align: ${props => props.align ? props.align : 'left'};
 `;
 
 export const SemiPhase = styled.span<CSSFormat>`
@@ -271,12 +274,3 @@ export const SemiPhase = styled.span<CSSFormat>`
     `
   }
 `;
-
-
-// export const SubDiv = styled.div<CSSFormat>`
-//   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
-//   margin: ${props => props.margin && props.margin};
-//   padding: ${props => props.padding ? props.padding : 'auto'};
-//   width: ${props => props.width ? props.width : '100%'};
-//   height: ${props => props.height ? props.height : 'auto'};
-// `;

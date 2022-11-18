@@ -1,4 +1,4 @@
-import * as Emo from '../../../styles/Basic';
+import * as Emo from '../../../styles/emotions/Basic';
 import { dataObj } from '../../../interfaceSet/Interface';
 import Link from 'next/link';
 import { IoIosBookmark } from 'react-icons/io';

@@ -1,15 +1,17 @@
 /**@jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react';
-import { CSSFormat } from '../interfaceSet/Interface';
+import { CSSFormat } from '../../interfaceSet/Interface';
 import styled from '@emotion/styled';
 
 export const BaseModal = styled.div<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   margin: ${props => props.margin ? props.margin : '0 auto'};
-  border-radius: 2.5rem;
+  border-radius: ${props => props.b_radius ? props.b_radius : '2.5rem'};
   border: ${props => props.border ? props.border : 'none'};
+  padding: ${props => props.padding ? props.padding : 'none'};
   width: ${props => props.width ? props.width : '100%'};
   height: ${props => props.height ? props.height : 'auto'};
+  background-color: ${props => props.bgcolor ? props.bgcolor : 'auto'};
 
   ${props => props.isPosition &&
     css`
@@ -20,6 +22,14 @@ export const BaseModal = styled.div<CSSFormat>`
       right: ${props.right ? props.right : 'auto'};
       transform: ${props.transform ? props.transform : 'auto'};
       z-index: ${props.zIndex ? props.zIndex : 'auto'};
+    `
+  }
+
+  ${props => props.isCenter &&
+    css`
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     `
   }
 `;
@@ -48,9 +58,11 @@ export const ErrorModal = styled(BaseModal)`
 `;
 
 export const ModalTitle = styled.h4<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   margin-bottom: ${props => props.marginbottom ? props.marginbottom : '5rem'};
   font-size: ${props => props.fontsize ? props.fontsize : '2.3rem'};
   font-weight: ${props => props.fontweight ? props.fontweight : '600'};
+  text-align: ${props => props.align ? props.align : 'center'};
 `;
 
 export const ModalSTitle = styled.h5<CSSFormat>`

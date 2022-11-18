@@ -1,5 +1,19 @@
 import React from 'react';
 
+export class ResponseData<T> {
+  ResResult: boolean;
+  ResData: T | Array<T>;
+  ERROR_MESSAGE: string;
+  constructor(result: boolean, data: T, error: string) {
+    this.ResResult = result;
+    this.ResData = data;
+    this.ERROR_MESSAGE = error;
+  }
+  ResponseData<T>() {
+    return this;
+  }
+}
+
 export interface CSSFormat {
   [key: string]: string | any;
 }
@@ -25,8 +39,6 @@ export interface messageProps {
 export interface funcProps<T> {
   [key: string]: (x: T) => void;
 }
-
-
 
 export type reducerFunc<A, B> = {
   (x: A, y: B): A

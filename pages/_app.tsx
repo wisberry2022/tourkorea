@@ -1,8 +1,8 @@
-import '../styles/globals.css'
-import '../styles/Header.scss'
-import '../styles/Main.scss'
-import '../styles/Footer.scss'
-import '../styles/Modal.scss'
+import '../styles/scss/globals.css'
+import '../styles/scss/Header.scss'
+import '../styles/scss/Main.scss'
+import '../styles/scss/Footer.scss'
+import '../styles/scss/Modal.scss'
 import { wrapper } from '../store';
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'

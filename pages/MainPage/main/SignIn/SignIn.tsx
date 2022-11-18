@@ -1,9 +1,9 @@
 /**@jsxImportSource @emotion/react */
 import { includeCSSObj } from '../../../../interfaceSet/Interface';
-import * as Emo from '../../../../styles/Basic';
-import * as Style from '../../../../styles/signIn';
+import * as Emo from '../../../../styles/emotions/Basic';
+import * as Style from '../../../../styles/emotions/signIn';
 import { useState } from 'react';
-import { SignUpModal } from '../../../modalSet/ModalSet';
+import { SignUpModal, SuccessModal } from '../../../modalSet/ModalSet';
 
 const Left = () => {
   return (
@@ -30,6 +30,8 @@ const Left = () => {
 
 const Right = () => {
   const [suModal, setSU] = useState<boolean>(false);
+  const [suSuccess, setSuccess] = useState<boolean>(false);
+
   const socialList: Array<includeCSSObj> = [
     { id: 1, title: '네이버 로그인', icon: '../assets/logo/social_01.png', bgColor: '#03C75A', color: '#fff', border: 'none' },
     { id: 2, title: '카카오 로그인', icon: '../assets/logo/social_02.png', bgColor: '#FDDC3F', color: '#111', border: 'none' },
@@ -71,7 +73,8 @@ const Right = () => {
           <Emo.SemiPhase cursor={true}>아이디, 비밀번호를 잊었다면?</Emo.SemiPhase>
         </Emo.BasicDiv>
       </Style.BottomDiv>
-      {suModal ? <SignUpModal setSU={setSU} /> : null}
+      {suModal ? <SignUpModal setSU={setSU} setSuccess={setSuccess} /> : null}
+      {suSuccess ? <SuccessModal setSuccess={setSuccess} /> : null}
     </Emo.BasicDiv>
   )
 }
