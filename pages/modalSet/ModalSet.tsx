@@ -2,6 +2,7 @@ import * as BS from '../../styles/emotions/Basic'
 import * as MD from '../../styles/emotions/Modal'
 import * as SI from '../../styles/emotions/signIn'
 import { funcProps, includeCSSObj } from '../../interfaceSet/Interface'
+import { SignUpType } from '../../interfaceSet/funcInterface'
 import { RootState } from '../../store/modules'
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux'
@@ -26,7 +27,7 @@ export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
     { id: 5, width: '100%', name: 'address', type: 'address', placeholder: '주소지를 입력하세요' },
   ];
 
-  const SignUp = (personInfo: boolean | undefined) => {
+  const SignUp: SignUpType = (personInfo: boolean | undefined) => {
     if (personInfo) {
       axios.post('/api/user/signup', signUpData)
         .then(() => (setSuccess(true), setSU(false)))
@@ -64,7 +65,7 @@ export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
                 ))}
               </BS.ScrollDiv>
             </BS.SubDiv>
-            <BS.SubDiv display='flex' justifycontent='center' alignitems='center' gap='0'>
+            <BS.SubDiv className="agreeBox" display='flex' justifycontent='center' alignitems='center' gap='0'>
               <SI.SignInput debug={false} ref={isAgree} width='5%' type="checkbox" />
               <BS.Emphasize debug={false}>개인정보 이용약관에 동의합니다.</BS.Emphasize>
             </BS.SubDiv>
@@ -91,7 +92,7 @@ export const AlertModal = ({ setAlert, MESSAGE }: userProps) => {
 
 export const SuccessModal = ({ setSuccess }: funcProps<boolean>) => {
   return (
-    <MD.BaseModal isPosition={true} position='absolute' top='-5%' left='-35%' border='.1rem solid #eee' padding='3rem 1.5rem' bgcolor='#fff'>
+    <MD.BaseModal isPosition={true} position='absolute' top='-5%' left='-35%' border='.1rem solid #eee' padding='3rem 1.5rem' bgcolor='#fff' isRespon='sm'>
       <BS.CustomFigure margin='0 auto 3.5rem auto' width='35%' height='14rem' background={true} bgsize='cover' imgLink='../../assets/image/main/congratulation.png' ></BS.CustomFigure>
       <MD.ModalTitle marginbottom='1.5rem' fontsize='2.3rem'>
         회원가입 성공!

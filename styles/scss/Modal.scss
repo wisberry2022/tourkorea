@@ -16,6 +16,18 @@
           font-size: 1.6rem;
         }
       }
+
+      @media screen and (max-width:500px) {
+        align-content: center;
+
+        .inputBox {
+          align-items: center;
+
+          >input {
+            width: 90%;
+          }
+        }
+      }
     }
 
     .mRight {
@@ -23,8 +35,28 @@
         display: none;
       }
 
+      @media screen and (max-width: 500px) {
+        >div:first-child {
+          margin-bottom: 1rem;
+        }
 
+        .agreeBox {
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          margin-bottom: 1.5rem;
+
+          input[type='checkbox'] {
+            width: 5%;
+          }
+
+          strong {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+          }
+        }
+      }
     }
   }
-
 }

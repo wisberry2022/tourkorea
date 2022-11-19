@@ -1,7 +1,7 @@
 /**@jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react';
-import { CSSFormat } from '../interfaceSet/Interface';
 import styled from '@emotion/styled';
+import { CSSFormat } from '../../interfaceSet/Interface';
 
 const breakpoints = [500, 768, 1200];
 const mQ = breakpoints.map(bp => `@media screen and (max-width:${bp}px)`)
@@ -77,7 +77,7 @@ export const SignInput = styled.input<CSSFormat>`
   }
 
   ${mQ[0]} {
-    width: 80%;
+    width: 77%;
     text-align: center;
   }
 `;
