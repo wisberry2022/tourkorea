@@ -52,7 +52,6 @@ export type Action =
   | { type: 'ADD', event: React.BaseSyntheticEvent }
   | { type: 'DELETE' }
 
-
-// export type Action = {
-//   type: 'ADD' | 'DELETE'
-// }
+export type useInputProps = {
+  type: 'SignUp' | 'SignIn'
+}

@@ -16,7 +16,7 @@ interface userProps {
 
 export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
   const infoDesc = useSelector((state: RootState) => state.personInfo);
-  const [signUpData, dispatch] = useInput();
+  const [signUpData, dispatch] = useInput('SignUp');
   const [alert, setAlert] = useState<Array<any>>([false, '']);
   const isAgree = useRef<HTMLInputElement>(null);
   const tagList: Array<includeCSSObj> = [
@@ -28,6 +28,7 @@ export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
   ];
 
   const SignUp: SignUpType = (personInfo: boolean | undefined) => {
+    console.log('회원가입 Reducer', signUpData);
     if (personInfo) {
       axios.post('/api/user/signup', signUpData)
         .then(() => (setSuccess(true), setSU(false)))
