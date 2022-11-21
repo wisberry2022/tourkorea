@@ -2,23 +2,11 @@ import mongoose from 'mongoose';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ResponseData } from '../../../interfaceSet/Interface';
 import nextConnect from 'next-connect';
-import dbConnect from '../../db/db';
-import User from '../../db/models/User';
 const bcrypt = require('bcrypt');
-
-interface dbFunc {
-  (): Promise<void>
-}
-
-const DBLink: dbFunc = async () => {
-  await dbConnect();
-  new User();
-}
 
 const handler = nextConnect<NextApiRequest, NextApiResponse>();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-  await DBLink();
   const signUpData = req.body
   const SignUp = mongoose.models.User;
   const saltRounds = 10;

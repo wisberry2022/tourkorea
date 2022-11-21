@@ -37,6 +37,10 @@ main {
       gap: 2.5rem;
       transform: translateY(22%);
 
+      .alertModal {
+        width: 50%;
+      }
+
 
       @media screen and (max-width:768px) {
         transform: translateY(0);

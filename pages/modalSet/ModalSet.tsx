@@ -84,7 +84,7 @@ export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
 
 export const AlertModal = ({ setAlert, MESSAGE }: userProps) => {
   return (
-    <MD.ErrorModal isPosition={true} width='30%'>
+    <MD.ErrorModal className="alertModal" isPosition={true} width='30%'>
       <MD.ModalTitle marginbottom='3rem' fontsize='1.7rem'>{MESSAGE}</MD.ModalTitle>
       <BS.Button debug={false} b_radius='2.5rem' width='40%' fontsize='1.7rem' fontweight='600' bgcolor='#2BAE66' color='#fff' onClick={() => (setAlert([false, '']))}>확인</BS.Button>
     </MD.ErrorModal>

@@ -14,6 +14,12 @@ export class ResponseData<T> {
   }
 }
 
+export interface ClientResData {
+  ResResult: boolean;
+  ResData: any;
+  ERROR_MESSAGE: string;
+}
+
 export interface CSSFormat {
   [key: string]: string | any;
 }
@@ -52,6 +58,4 @@ export type Action =
   | { type: 'ADD', event: React.BaseSyntheticEvent }
   | { type: 'DELETE' }
 
-export type useInputProps = {
-  type: 'SignUp' | 'SignIn'
-}
+export type useInputProps = 'SignUp' | 'SignIn'
