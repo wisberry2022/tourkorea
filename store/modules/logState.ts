@@ -20,8 +20,8 @@ const logSlice = createSlice({
   reducers: {
     CHANGE: (state: stateObj, action: actionObj) => {
       const [log, token] = action.payload;
-      state['logState'] = log;
-      state['accessToken'] = token;
+      state.logState = log;
+      state.accessToken = token;
     }
   }
 })

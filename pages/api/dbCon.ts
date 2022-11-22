@@ -1,4 +1,3 @@
-
 import nextConnect from "next-connect";
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../db/db";

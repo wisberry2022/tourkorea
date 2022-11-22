@@ -1,16 +1,30 @@
 import type { NextPage } from 'next'
 import Total from './MainPage/Total'
 import axios from 'axios'
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/modules';
+import Sub from './tour/Sub';
 
 interface gspProps {
   result?: JSON;
 }
 
 const Home: NextPage = () => {
+  const { logState } = useSelector((state: RootState) => state.logState);
+  console.log('HOME에서의 로그인 상태', logState);
   return (
-    <div>
-      <Total />
-    </div>
+    <>
+      {
+        logState ?
+          <div className="Wrapper">
+            <Sub />
+          </div>
+          :
+          <div className="Wrapper">
+            <Total />
+          </div>
+      }
+    </>
   )
 }
 

@@ -14,6 +14,12 @@ export class ResponseData<T> {
   }
 }
 
+export interface resultData {
+  result: boolean;
+  uid: string | null;
+  email: string | null;
+}
+
 export interface ClientResData {
   ResResult: boolean;
   ResData: any;
@@ -59,3 +65,4 @@ export type Action =
   | { type: 'DELETE' }
 
 export type useInputProps = 'SignUp' | 'SignIn'
+

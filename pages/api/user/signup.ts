@@ -32,7 +32,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
                       res.send(resResult)
                     })
                 })
-
               })
               console.log('등록 성공!')
             } else {

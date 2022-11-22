@@ -1,12 +1,16 @@
+
 /**@jsxImportSource @emotion/react */
-import { includeCSSObj } from '../../../../interfaceSet/Interface';
 import * as Emo from '../../../../styles/emotions/Basic';
 import * as Style from '../../../../styles/emotions/signIn';
+import axios from 'axios';
+import Router from 'next/router';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { includeCSSObj } from '../../../../interfaceSet/Interface';
 import { useState } from 'react';
 import { AlertModal, SignUpModal, SuccessModal } from '../../../modalSet/ModalSet';
 import { RootState } from '../../../../store/modules';
 import { useInput } from '../../../../customHook/custom';
-import axios from 'axios';
+import { useVerify } from '../../../../customHook/verifyToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE } from '../../../../store/modules/logState';
 
@@ -34,29 +38,29 @@ const Left = () => {
 }
 
 const Right = () => {
+  const { data: session, status } = useSession();
+  console.log('next-auth', session, status)
   const [suModal, setSU] = useState<boolean>(false);
   const [suSuccess, setSuccess] = useState<boolean>(false);
   const [signInData, dispatch] = useInput('SignIn');
   const [err, setErr] = useState<Array<any>>([false, '']);
   const logState = useSelector((state: RootState) => state.logState)
   const storeDispatch = useDispatch();
-  console.log('로그인 전', logState);
+  // const log = useVerify(logState.accessToken);
   const socialList: Array<includeCSSObj> = [
-    { id: 1, title: '네이버 로그인', icon: '../assets/logo/social_01.png', bgColor: '#03C75A', color: '#fff', border: 'none' },
-    { id: 2, title: '카카오 로그인', icon: '../assets/logo/social_02.png', bgColor: '#FDDC3F', color: '#111', border: 'none' },
-    { id: 3, title: 'Google 로그인', icon: '../assets/logo/social_03.png', bgColor: '#fff', color: '#111', border: '0.1rem solid #eee' },
+    { id: 1, title: '네이버 로그인', social: 'naver', icon: '../assets/logo/social_01.png', bgColor: '#03C75A', color: '#fff', border: 'none' },
+    { id: 2, title: '카카오 로그인', social: 'kakao', icon: '../assets/logo/social_02.png', bgColor: '#FDDC3F', color: '#111', border: 'none' },
+    { id: 3, title: 'Google 로그인', social: 'google', icon: '../assets/logo/social_03.png', bgColor: '#fff', color: '#111', border: '0.1rem solid #eee' },
   ]
 
   const SignIn = async () => {
     try {
       const result = await axios.post('/api/user/signin', signInData);
       storeDispatch(CHANGE([result.data.ResResult, result.data.ResData]))
-      console.log('로그인 후', logState)
-      console.log('로그인 성공', result)
+      Router.push("../../tour/Sub");
     }
     catch (error: any) {
       const errData = error.response.data;
-      console.log('로그인 실패', errData);
       if (errData.ERROR_MESSAGE) {
         setErr([!(errData.resResult), errData.ERROR_MESSAGE])
       }
@@ -81,12 +85,13 @@ const Right = () => {
             <Emo.Button width='100%' height='4.5rem' bgcolor='#2BAE66' color='#fff' fontsize='1.8rem' onClick={SignIn}>로그인하기</Emo.Button>
             <Emo.RowFlexUl customlist={true} listdisplay='flex' listgap='4rem' gap='1.5rem' listjustify='center' className="socialLogin">
               {socialList.map(it => (
-                <li key={it.id} className="subList" style={{ border: it.border, backgroundColor: it.bgColor, color: it.color }}>
+                <li key={it.id} className="subList" onClick={() => (signIn(it.social))} style={{ border: it.border, backgroundColor: it.bgColor, color: it.color }}>
                   <Emo.CustomFigure margin='.2rem 0 0 0' width='3rem' height='3rem' background={true} imgLink={it.icon}></Emo.CustomFigure>
                   <Emo.Emphasize>{it.title}</Emo.Emphasize>
                 </li>
               ))}
             </Emo.RowFlexUl>
+            {/* <button onClick={() => (signOut())}>로그아웃</button> */}
           </Style.ButtonBox>
           <Emo.SubDiv className="socialSet">
           </Emo.SubDiv>
