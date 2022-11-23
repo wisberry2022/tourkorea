@@ -1,4 +1,3 @@
-
 /**@jsxImportSource @emotion/react */
 import * as Emo from '../../../../styles/emotions/Basic';
 import * as Style from '../../../../styles/emotions/signIn';
@@ -39,7 +38,7 @@ const Left = () => {
 
 const Right = () => {
   const { data: session, status } = useSession();
-  console.log('next-auth', session, status)
+  console.log('next-auth', session)
   const [suModal, setSU] = useState<boolean>(false);
   const [suSuccess, setSuccess] = useState<boolean>(false);
   const [signInData, dispatch] = useInput('SignIn');
