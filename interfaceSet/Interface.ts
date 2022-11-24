@@ -52,6 +52,23 @@ export interface funcProps<T> {
   [key: string]: (x: T) => void;
 }
 
+export interface sessionUser {
+  name: string;
+  email: string;
+  image: null | string;
+}
+
+export interface clientSession {
+  user: sessionUser;
+  expires: string;
+  token: string | null | undefined;
+}
+
+export interface sessionData {
+  readonly data: any;
+  readonly status: string;
+}
+
 export type reducerFunc<A, B> = {
   (x: A, y: B): A
 }

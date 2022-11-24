@@ -1,8 +1,12 @@
 import type { NextPage } from 'next'
 import Total from './MainPage/Total'
 import axios from 'axios'
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { sessionData } from '../interfaceSet/Interface';
+import { useSession } from 'next-auth/react';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/modules';
+import { CHANGE } from '../store/modules/logState';
 import Sub from './tour/Sub';
 
 interface gspProps {
@@ -10,8 +14,25 @@ interface gspProps {
 }
 
 const Home: NextPage = () => {
-  const { logState } = useSelector((state: RootState) => state.logState);
-  console.log('HOME에서의 로그인 상태', logState);
+  const { data: session }: sessionData = useSession();
+  const { logState, provider } = useSelector((state: RootState) => state.logState);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // if (session) {
+    //   dispatch(CHANGE([session.logState, session.token]))
+    // } else {
+    //   dispatch(CHANGE([false, '']))
+    // }
+    if (session) {
+      dispatch(CHANGE([session.logState, session.token, true]))
+    } else if (session === null && provider) {
+      dispatch(CHANGE([false, '', false]))
+    }
+  }, [])
+
+  console.log('home에서의 로그인 상태', session, logState)
+
   return (
     <>
       {

@@ -4,14 +4,14 @@ import * as Style from '../../../../styles/emotions/signIn';
 import axios from 'axios';
 import Router from 'next/router';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { includeCSSObj } from '../../../../interfaceSet/Interface';
-import { useState } from 'react';
+import { sessionData, includeCSSObj } from '../../../../interfaceSet/Interface';
+import { useState, useEffect } from 'react';
 import { AlertModal, SignUpModal, SuccessModal } from '../../../modalSet/ModalSet';
 import { RootState } from '../../../../store/modules';
 import { useInput } from '../../../../customHook/custom';
-import { useVerify } from '../../../../customHook/verifyToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE } from '../../../../store/modules/logState';
+import { useVerify } from '../../../../customHook/verifyToken';
 
 const Left = () => {
   return (
@@ -37,15 +37,12 @@ const Left = () => {
 }
 
 const Right = () => {
-  const { data: session, status } = useSession();
-  console.log('next-auth', session)
   const [suModal, setSU] = useState<boolean>(false);
   const [suSuccess, setSuccess] = useState<boolean>(false);
   const [signInData, dispatch] = useInput('SignIn');
   const [err, setErr] = useState<Array<any>>([false, '']);
   const logState = useSelector((state: RootState) => state.logState)
   const storeDispatch = useDispatch();
-  // const log = useVerify(logState.accessToken);
   const socialList: Array<includeCSSObj> = [
     { id: 1, title: '네이버 로그인', social: 'naver', icon: '../assets/logo/social_01.png', bgColor: '#03C75A', color: '#fff', border: 'none' },
     { id: 2, title: '카카오 로그인', social: 'kakao', icon: '../assets/logo/social_02.png', bgColor: '#FDDC3F', color: '#111', border: 'none' },
@@ -55,7 +52,7 @@ const Right = () => {
   const SignIn = async () => {
     try {
       const result = await axios.post('/api/user/signin', signInData);
-      storeDispatch(CHANGE([result.data.ResResult, result.data.ResData]))
+      storeDispatch(CHANGE([result.data.ResResult, result.data.ResData, false]))
       Router.push("../../tour/Sub");
     }
     catch (error: any) {
@@ -90,7 +87,6 @@ const Right = () => {
                 </li>
               ))}
             </Emo.RowFlexUl>
-            {/* <button onClick={() => (signOut())}>로그아웃</button> */}
           </Style.ButtonBox>
           <Emo.SubDiv className="socialSet">
           </Emo.SubDiv>
@@ -98,8 +94,8 @@ const Right = () => {
       </Style.TopDiv>
       <Style.BottomDiv className="bottom">
         <Emo.BasicDiv className="signInfo">
-          <Emo.SemiPhase cursor={true} onClick={() => (setSU(prev => !prev))}>회원가입하기</Emo.SemiPhase>
-          <Emo.SemiPhase cursor={true}>아이디, 비밀번호를 잊었다면?</Emo.SemiPhase>
+          <Emo.SemiPhase cursor="true" onClick={() => (setSU(prev => !prev))}>회원가입하기</Emo.SemiPhase>
+          <Emo.SemiPhase cursor="true">아이디, 비밀번호를 잊었다면?</Emo.SemiPhase>
         </Emo.BasicDiv>
       </Style.BottomDiv>
       {suModal ? <SignUpModal setSU={setSU} setSuccess={setSuccess} /> : null}
@@ -111,12 +107,14 @@ const Right = () => {
 
 const SignIn = () => {
   return (
-    <Emo.Section className="signIn">
-      <Emo.Container display='flex' gap='0' width='120rem' className="inner totalBox">
-        <Left />
-        <Right />
-      </Emo.Container>
-    </Emo.Section>
+    <>
+      <Emo.Section className="signIn">
+        <Emo.Container display='flex' gap='0' width='120rem' className="inner totalBox">
+          <Left />
+          <Right />
+        </Emo.Container>
+      </Emo.Section>
+    </>
   )
 }
 

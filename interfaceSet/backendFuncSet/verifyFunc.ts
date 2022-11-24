@@ -19,3 +19,17 @@ export const verifyAT = (secretKey: string, Token: string): resultData => {
   })
   return vResult;
 }
+
+export const getJWToken = (id: string, email: string, secretKey: string) => {
+  const accessToken = jwt.sign(
+    {
+      id: id,
+      email: email,
+    },
+    secretKey,
+    {
+      expiresIn: "100m",
+    }
+  )
+  return accessToken;
+}

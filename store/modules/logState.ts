@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface stateObj {
   logState: boolean;
   accessToken: string;
+  provider: boolean;
 }
 
 interface actionObj {
@@ -11,7 +12,8 @@ interface actionObj {
 
 const initialState: stateObj = {
   logState: false,
-  accessToken: ''
+  accessToken: '',
+  provider: false,
 };
 
 const logSlice = createSlice({
@@ -19,9 +21,10 @@ const logSlice = createSlice({
   initialState,
   reducers: {
     CHANGE: (state: stateObj, action: actionObj) => {
-      const [log, token] = action.payload;
+      const [log, token, provider] = action.payload;
       state.logState = log;
       state.accessToken = token;
+      state.provider = provider;
     }
   }
 })
