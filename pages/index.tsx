@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/modules';
 import { CHANGE } from '../store/modules/logState';
 import Sub from './tour/Sub';
+import Script from 'next/script';
 
 interface gspProps {
   result?: JSON;
@@ -17,13 +18,9 @@ const Home: NextPage = () => {
   const { data: session }: sessionData = useSession();
   const { logState, provider } = useSelector((state: RootState) => state.logState);
   const dispatch = useDispatch();
+  console.log('여기는 index.tsx!');
 
   useEffect(() => {
-    // if (session) {
-    //   dispatch(CHANGE([session.logState, session.token]))
-    // } else {
-    //   dispatch(CHANGE([false, '']))
-    // }
     if (session) {
       dispatch(CHANGE([session.logState, session.token, true]))
     } else if (session === null && provider) {

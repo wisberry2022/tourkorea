@@ -1,20 +1,25 @@
 import * as Emo from '../../../styles/emotions/Basic';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { dataObj } from '../../../interfaceSet/Interface';
 import { IoIosBookmark, IoIosSearch, IoIosKeypad, IoIosLogIn, IoIosContact, IoIosPaper, IoIosInformationCircleOutline, IoMdSettings, IoIosLogOut } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/modules';
 import { CHANGE } from '../../../store/modules/logState';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useVerify } from '../../../customHook/verifyToken';
 
-const DropMenu = () => {
-  const { logState, provider } = useSelector((state: RootState) => (state.logState));
+interface childProps {
+  id: string;
+}
+
+const DropMenu = ({ id }: childProps) => {
+  const { logState, accessToken, provider } = useSelector((state: RootState) => (state.logState));
+  const { data: session, status } = useSession();
   const dispatch = useDispatch();
-  console.log('header에서 보는 logState', logState);
   const NLdropList: dataObj = { id: 1, title: '로그인 해주세요', icon: <IoIosLogIn /> }
   const dropList: Array<dataObj> = [
-    { id: 1, title: '', icon: <IoIosContact />, link: '/' },
+    { id: 1, title: id, icon: <IoIosContact />, link: '/' },
     { id: 2, title: '마이페이지', icon: <IoIosPaper />, link: '/' },
     { id: 3, title: '도움말', icon: <IoIosInformationCircleOutline />, link: '' },
     { id: 4, title: '설정', icon: <IoMdSettings />, link: '' },
@@ -30,24 +35,31 @@ const DropMenu = () => {
   }
 
   return (
-    <Emo.PositionDiv className="dropMenu" debug={true} position='absolute' zIndex='999'>
-      <Emo.ColFlexUl customlist={true}>
+    <Emo.PositionDiv className="dropMenu" position='absolute' left='50%' transform="translateX(-50%)" width='15rem' zIndex='999' border='.1rem solid #ddd'>
+      <Emo.BasicDiv className="totalBox">
         {logState ?
           dropList.map(it => (
-            <Emo.CustomLI key={it.id} onClick={() => (it.title === '로그아웃' ? SignOut() : false)}>
-              {it.title}
-            </Emo.CustomLI>
+            <Emo.SubDiv className="listBox" key={it.id} onClick={() => (it.title === '로그아웃' ? SignOut() : false)}>
+              <Link href={`${it.link}`}>
+                {it.icon}
+                <Emo.PlainStrong>{it.title}</Emo.PlainStrong>
+              </Link>
+            </Emo.SubDiv>
           )) :
-          <Emo.CustomLI>
-            {NLdropList.title}
-          </Emo.CustomLI>
+          <Emo.SubDiv className="listBox unLogin">
+            <Emo.PlainStrong>{NLdropList.title}</Emo.PlainStrong>
+          </Emo.SubDiv>
         }
-      </Emo.ColFlexUl>
+      </Emo.BasicDiv>
     </Emo.PositionDiv>
   )
 }
 
 const Header = () => {
+  const { accessToken } = useSelector((state: RootState) => (state.logState));
+  const uid: string = useVerify(accessToken, 'uid') as string;
+
+  console.log('Header에서의 id', uid)
   const [isDrop, setDrop] = useState(false)
 
   const navList: Array<dataObj> = [
@@ -72,7 +84,7 @@ const Header = () => {
                 <Link href={`${it.link}`}>
                   {it.icon}
                 </Link>
-                {isDrop && it.id === 3 ? <DropMenu /> : null}
+                {isDrop && it.id === 3 ? <DropMenu id={uid} /> : null}
               </li>
             )
             )}

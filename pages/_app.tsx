@@ -3,6 +3,7 @@ import '../styles/scss/Header.scss'
 import '../styles/scss/Main.scss'
 import '../styles/scss/Footer.scss'
 import '../styles/scss/Modal.scss'
+import '../styles/scss/sub.scss'
 import { pstore, wrapper } from '../store';
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'

@@ -1,18 +1,25 @@
-import { signOut } from "next-auth/react";
-import { useDispatch } from "react-redux";
-import { CHANGE } from "../../store/modules/logState";
+/* global kakao */
+import * as BS from '../../styles/emotions/Basic';
+import { useEffect } from 'react';
+import Kakao from 'next-auth/providers/kakao';
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 const Contents = () => {
-  const dispatch = useDispatch();
-  const SocialSignOut = async () => {
-    signOut();
-  }
+
+  useEffect(() => {
+
+
+  }, [])
 
   return (
-    <div>
-      hello
-      <button onClick={() => (SocialSignOut())}>로그아웃</button>
-    </div>
+    <BS.Section>
+      <BS.BasicDiv id="map"></BS.BasicDiv>
+    </BS.Section>
   )
 }
 

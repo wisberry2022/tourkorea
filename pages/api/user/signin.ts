@@ -9,20 +9,6 @@ const bcrypt = require('bcrypt');
 const signinHandler = nextConnect<NextApiRequest, NextApiResponse>();
 const SECRET_KEY = process.env.NEXT_PUBLIC_JWT_SECRET_KEY;
 
-// const getJWToken = (id: string, email: string, secretKey: string) => {
-//   const accessToken = jwt.sign(
-//     {
-//       id: id,
-//       email: email,
-//     },
-//     secretKey,
-//     {
-//       expiresIn: "100m",
-//     }
-//   )
-//   return accessToken;
-// }
-
 signinHandler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const SignIn = mongoose.models.User;
   const { id: uid, pwd } = req.body;

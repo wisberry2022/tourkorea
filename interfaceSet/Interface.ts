@@ -83,3 +83,5 @@ export type Action =
 
 export type useInputProps = 'SignUp' | 'SignIn'
 
+export type useType = 'uid' | 'email' | boolean;
+

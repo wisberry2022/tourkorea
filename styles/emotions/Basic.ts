@@ -115,6 +115,9 @@ export const PositionDiv = styled.div<CSSFormat>`
   right: ${props => props.right ? props.right : 'auto'};
   transform: ${props => props.transform ? props.transform : 'auto'};
   z-index: ${props => props.zIndex ? props.zIndex : 'auto'};
+  border: ${props => props.border ? props.border : 'none'};
+  width: ${props => props.width ? props.width : 'auto'};
+  height: ${props => props.height ? props.height : 'auto'};
 
   ${mQ[2]} {
     top: 230%;
@@ -253,6 +256,11 @@ export const Emphasize = styled.strong<CSSFormat>`
     font-size: 1.8rem;
     font-weight: 500;
   }
+`;
+
+export const PlainStrong = styled.strong<CSSFormat>`
+  outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
+  
 `;
 
 export const Phase = styled.p<CSSFormat>`

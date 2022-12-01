@@ -28,7 +28,7 @@ export const getJWToken = (id: string, email: string, secretKey: string) => {
     },
     secretKey,
     {
-      expiresIn: "100m",
+      expiresIn: "5h",
     }
   )
   return accessToken;

@@ -37,6 +37,10 @@ a {
   text-decoration: none;
 }
 
+strong {
+  font-weight: inherit;
+}
+
 * {
   box-sizing: border-box;
 }
