@@ -1,7 +1,6 @@
 /* global kakao */
 import * as BS from '../../styles/emotions/Basic';
 import { useEffect } from 'react';
-import Kakao from 'next-auth/providers/kakao';
 
 declare global {
   interface Window {
