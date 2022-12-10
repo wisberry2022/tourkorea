@@ -11,6 +11,7 @@ export const Section = styled.section<CSSFormat>`
   outline: ${props => props.debug ? '.1rem solid #000' : 'none'};
   position: relative;
   padding: 10rem 0;
+  height: ${props => props.height ? props.height : 'auto'};
 
   ${mQ[2]} {
     padding: 8rem 0;

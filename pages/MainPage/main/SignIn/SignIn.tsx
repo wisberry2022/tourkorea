@@ -3,15 +3,13 @@ import * as Emo from '../../../../styles/emotions/Basic';
 import * as Style from '../../../../styles/emotions/signIn';
 import axios from 'axios';
 import Router from 'next/router';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { sessionData, includeCSSObj } from '../../../../interfaceSet/Interface';
-import { useState, useEffect } from 'react';
+import { signIn } from 'next-auth/react';
+import { includeCSSObj } from '../../../../interfaceSet/Interface';
+import { useState } from 'react';
 import { AlertModal, SignUpModal, SuccessModal } from '../../../modalSet/ModalSet';
-import { RootState } from '../../../../store/modules';
 import { useInput } from '../../../../customHook/custom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE } from '../../../../store/modules/logState';
-import { useVerify } from '../../../../customHook/verifyToken';
 
 const Left = () => {
   return (
@@ -41,7 +39,6 @@ const Right = () => {
   const [suSuccess, setSuccess] = useState<boolean>(false);
   const [signInData, dispatch] = useInput('SignIn');
   const [err, setErr] = useState<Array<any>>([false, '']);
-  const logState = useSelector((state: RootState) => state.logState)
   const storeDispatch = useDispatch();
   const socialList: Array<includeCSSObj> = [
     { id: 1, title: '네이버 로그인', social: 'naver', icon: '../assets/logo/social_01.png', bgColor: '#03C75A', color: '#fff', border: 'none' },

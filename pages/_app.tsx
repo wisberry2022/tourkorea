@@ -10,18 +10,22 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { SessionProvider } from 'next-auth/react';
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const persistor = persistStore(pstore);
   const { props } = wrapper.useWrappedStore(pageProps);
   return (
-    <SessionProvider session={session}>
-      <Provider store={pstore}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Component {...props.pageProps} />
-        </PersistGate>
-      </Provider>
-    </SessionProvider>
+    <>
+      <Script src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&libraries=services,clusterer,drawing&autoload=false`}></Script>
+      <SessionProvider session={session}>
+        <Provider store={pstore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Component {...props.pageProps} />
+          </PersistGate>
+        </Provider>
+      </SessionProvider>
+    </>
   )
 }
 

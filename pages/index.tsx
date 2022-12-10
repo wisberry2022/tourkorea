@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/modules';
 import { CHANGE } from '../store/modules/logState';
 import Sub from './tour/Sub';
-import Script from 'next/script';
 
 interface gspProps {
   result?: JSON;
@@ -28,8 +27,6 @@ const Home: NextPage = () => {
     }
   }, [])
 
-  console.log('home에서의 로그인 상태', session, logState)
-
   return (
     <>
       {
@@ -42,6 +39,7 @@ const Home: NextPage = () => {
             <Total />
           </div>
       }
+
     </>
   )
 }

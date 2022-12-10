@@ -11,7 +11,7 @@ verifyHandler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const SECRET_KEY = process.env.NEXT_PUBLIC_JWT_SECRET_KEY;
   const jwt = req.headers.jwt_access_token;
   const vResult = verifyAT(SECRET_KEY as string, jwt as string);
-  console.log('ACCESS TOKEN 검증 결과', vResult);
+  // console.log('ACCESS TOKEN 검증 결과', vResult);
   if (vResult.result) {
     const resData: ClientResData = new ResponseData<resultData>(vResult.result, vResult, 'NONE')
     res.status(200).send(resData);
