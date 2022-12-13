@@ -28,7 +28,7 @@ export const SignUpModal = ({ setSU, setSuccess }: funcProps<boolean>) => {
   ];
 
   const SignUp: SignUpType = (personInfo: boolean | undefined) => {
-    console.log('회원가입 Reducer', signUpData);
+    // console.log('회원가입 Reducer', signUpData);
     if (personInfo) {
       axios.post('/api/user/signup', signUpData)
         .then(() => (setSuccess(true), setSU(false)))
@@ -103,6 +103,14 @@ export const SuccessModal = ({ setSuccess }: funcProps<boolean>) => {
         어서 빨리 여행지를 찾으러가요!
       </BS.Phase>
       <BS.Button margin='0 0 0 43%' b_radius='2.5rem' width='13%' fontsize='1.5rem' bgcolor='#2BAE66' color='#fff' onClick={() => (setSuccess(false))}>확인</BS.Button>
+    </MD.BaseModal>
+  )
+}
+
+export const PlaceInfoModal = () => {
+  return (
+    <MD.BaseModal isPosition={true} position="absolute" top="0" right="0" b_radius="none" width="40%" height="100%" zIndex="999" bgcolor="#fff">
+      hello
     </MD.BaseModal>
   )
 }

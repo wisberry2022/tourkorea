@@ -77,12 +77,40 @@ header {
   }
 }
 
+@media screen and (max-width:1200px) {
+  header {
+    nav {
+      .sideBar {
+        .dropMenu {
+          top: 130%;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width:768px) {
   header {
-
     nav {
       .sideBar {
         margin-right: 0;
+
+        .dropMenu {
+          position: absolute;
+          left: -120%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:500px) {
+  header {
+    nav {
+      .sideBar {
+        .dropMenu {
+          left: -182%;
+        }
       }
     }
   }
